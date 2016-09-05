@@ -2,6 +2,7 @@ require('dotenv').config()
 var express = require('express')
 var path = require('path')
 var logger = require('morgan')
+var favicon = require('serve-favicon')
 var bodyParser = require('body-parser')
 var cors = require('cors')
 
@@ -10,6 +11,7 @@ var blogs = require('./api_routes/blogs')
 
 var app = express()
 
+app.use(favicon(__dirname + '/dist/images/SpaceCadevsNoText.ico'));
 app.use(cors())
 app.use(logger('dev'))
 app.use(bodyParser.json())
