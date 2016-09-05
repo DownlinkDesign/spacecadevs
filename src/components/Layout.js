@@ -131,7 +131,7 @@ class Layout extends Component {
           <MenuItem
             className='sideNavItem'
             onClick={() => this.switchComponent('/')}>
-            BLOG
+            BLOGS
           </MenuItem>
           <MenuItem
             className='sideNavItem'
