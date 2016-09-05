@@ -53,3 +53,21 @@ img, embed, object, video {
     color: blue !important;
   }
 }
+
+.sideNav {
+  background: $darkblue !important;
+  .sideNavItem {
+    text-align: center;
+    border-bottom: 2px solid $darkblue !important;
+    background: $lightgreen !important;
+    color: $darkblue !important;
+    span {
+      div {
+        background: $darkblueT !important;
+      }
+    }
+    &:hover {
+      color: $mediumspringbud !important;
+    }
+  }
+}

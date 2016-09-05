@@ -1,1 +1,3 @@
 export const TOGGLE_TABS = 'TOGGLE_TABS'
+export const SET_CURRENT_TAB = 'SET_CURRENT_TAB'
+export const TOGGLE_SIDE_NAV = 'TOGGLE_SIDE_NAV'
