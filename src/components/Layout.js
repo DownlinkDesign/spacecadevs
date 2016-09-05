@@ -78,7 +78,7 @@ class Layout extends Component {
     const underLineStyle = {
       backgroundColor: 'rgb(32,50,67)'
     }
-
+    
     return (
       <div>
         <AppBar
