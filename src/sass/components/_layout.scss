@@ -1,0 +1,55 @@
+@import '../utils/variables';
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+img, embed, object, video {
+  max-width: 100%;
+  height: auto;
+}
+
+.navBar {
+  background: $darkblue !important;
+  .navLogo {
+    height: 60px;
+    vertical-align: middle;
+  }
+  span {
+    div {
+      background: $mediumspringbudT !important;
+    }
+  }
+  svg {
+    fill: $lightgreen !important;
+  }
+
+  .navTabs {
+    height: 65px;
+    background: $lightgreen !important;
+    color: $darkblue !important;
+    &:hover {
+      color: $mediumspringbud !important;
+    }
+    * {
+      margin-right: 12px !important;
+      padding-left: 12px !important;
+    }
+    span {
+      div {
+        background: $darkblueT !important;
+      }
+    }
+  }
+}
+
+.menuButton {
+  path {
+    background: blue !important;
+    color: blue !important;
+  }
+}
