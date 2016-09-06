@@ -5,7 +5,7 @@ var jwt = require('jsonwebtoken')
 var bcrypt = require('bcrypt')
 
 router.get('/', function(req, res, next) {
-  res.status(200).json('blogs')
+  res.status(200).json('likes')
 })
 
 module.exports = router

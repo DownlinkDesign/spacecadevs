@@ -7,6 +7,7 @@ import {
   TOGGLE_SIDE_NAV,
   SIGN_IN,
   SIGN_UP,
+  SIGN_OUT,
   TOGGLE_SIGN_IN_DIALOG,
   TOGGLE_SIGN_UP_DIALOG
 } from './types'
@@ -33,7 +34,7 @@ export function toggleSideNav(bool) {
 }
 
 export function signIn(userInfo) {
-  const request = axios.post(`${HOST}/users/signIn`, userInfo)
+  const request = axios.post(`${HOST}/users/signin`, userInfo)
   return {
     type: SIGN_IN,
     payload: request
@@ -62,9 +63,18 @@ export function toggleSignUpDialog(bool, dialogValue = '') {
 }
 
 export function signUp(userInfo) {
-  const request = axios.post(`${HOST}/users/signUp`, userInfo)
+  const request = axios.post(`${HOST}/users/signup`, userInfo)
   return {
     type: SIGN_UP,
     payload: request
+  }
+}
+
+export function signOut() {
+  delete window.localStorage['user_id']
+  delete window.localStorage['username']
+  delete window.localStorage['token']
+  return {
+    type: SIGN_OUT
   }
 }

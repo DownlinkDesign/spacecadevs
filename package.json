@@ -5,6 +5,7 @@
   "main": "./bin/www",
   "scripts": {
     "start": "NODE_ENV=production node ./bin/www",
+    "startdev": "NODE_ENV=development nodemon ./bin/www",
     "dev": "NODE_ENV=development node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot",
     "build": "NODE_ENV=production ./node_modules/.bin/webpack"
   },
@@ -53,6 +54,7 @@
   "dependencies": {
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
     "cors": "^2.7.1",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",

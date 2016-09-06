@@ -119,7 +119,7 @@ class SignIn extends Component {
           </Paper>
 
           <Dialog
-            title='Signin Error'
+            title='SIGN IN ERROR'
             actions={[
               <FlatButton
                 label='CLOSE'

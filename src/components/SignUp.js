@@ -148,7 +148,7 @@ class SignUp extends Component {
           </Paper>
 
           <Dialog
-            title='Signup Error'
+            title='SIGN UP ERROR'
             actions={[
               <FlatButton
                 label='CLOSE'
