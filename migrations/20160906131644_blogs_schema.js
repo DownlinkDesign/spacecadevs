@@ -3,6 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments()
     table.string('title').notNullable()
     table.text('content', 'longText').notNullable()
+    table.integer('author_id').unsigned().references('users.id').onDelete('CASCADE').onUpdate('CASCADE').index()
     table.bigInteger('created_at').notNullable().defaultTo(Date.now())
   })
 }
