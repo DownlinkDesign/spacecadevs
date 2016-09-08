@@ -8,6 +8,7 @@ import {
   Drawer,
   MenuItem
 } from 'material-ui'
+import { browserHistory } from 'react-router'
 
 class Layout extends Component {
   constructor(props) {
@@ -57,6 +58,19 @@ class Layout extends Component {
     window.addEventListener('resize', () => {
       this.checkDimensions(window.innerWidth)
     })
+    browserHistory.listen((location) => {
+      switch (location.pathname) {
+        case '/':
+        this.props.setCurrentTab(0)
+        break
+        case '/signin':
+        this.props.setCurrentTab(1)
+        break
+        case '/signup':
+        this.props.setCurrentTab(2)
+        break
+      }
+    })
   }
 
   toggleSideNav() {
@@ -78,7 +92,7 @@ class Layout extends Component {
     const underLineStyle = {
       backgroundColor: 'rgb(32,50,67)'
     }
-    
+
     return (
       <div>
         <AppBar
