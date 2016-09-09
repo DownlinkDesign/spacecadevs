@@ -2,7 +2,7 @@ var knex = require('../../../db_config/knex')
 var jwt = require('jsonwebtoken')
 var bcrypt = require('bcrypt')
 
-exports.signup = function(body) {
+exports.signUp = function(body) {
   return new Promise(function(resolve, reject) {
     if(!body || Object.keys(body).length === 0 && body.constructor === Object){
       reject({ error: 'The form was not properly completed' })

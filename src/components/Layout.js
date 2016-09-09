@@ -1,30 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import * as actions from '../actions'
-import {
-  AppBar,
-  Tabs,
-  Tab,
-  Drawer,
-  MenuItem
-} from 'material-ui'
 import { browserHistory } from 'react-router'
+import * as actions from '../actions'
+import { checkIfSignedIn } from '../helpers/checkIfSignedIn'
+import { determineTab } from '../helpers/determineTab'
+import { AppBar, Tabs, Tab, Drawer, MenuItem } from 'material-ui'
 
 class Layout extends Component {
   constructor(props) {
     super(props)
-
-    switch (this.props.location.pathname) {
-      case '/':
-      this.props.setCurrentTab(0)
-      break
-      case '/signin':
-      this.props.setCurrentTab(1)
-      break
-      case '/signup':
-      this.props.setCurrentTab(2)
-      break
-    }
+    this.props.setCurrentTab(determineTab(this.props.location.pathname))
   }
 
   static contextTypes = {
@@ -32,23 +17,15 @@ class Layout extends Component {
   }
 
   checkDimensions(dimensions) {
-    if (dimensions < 450) {
+    if (!this.props.signedIn && dimensions < 500) {
+      this.props.toggleTabs(false)
+    } else if(this.props.signedIn && dimensions < 700) {
       this.props.toggleTabs(false)
     } else {
       if (this.props.showSideNav) {
         this.toggleSideNav()
       }
-      switch (this.props.location.pathname) {
-        case '/':
-        this.props.setCurrentTab(0)
-        break
-        case '/signin':
-        this.props.setCurrentTab(1)
-        break
-        case '/signup':
-        this.props.setCurrentTab(2)
-        break
-      }
+      this.props.setCurrentTab(determineTab(this.props.location.pathname))
       this.props.toggleTabs(true)
     }
   }
@@ -59,17 +36,7 @@ class Layout extends Component {
       this.checkDimensions(window.innerWidth)
     })
     browserHistory.listen((location) => {
-      switch (location.pathname) {
-        case '/':
-        this.props.setCurrentTab(0)
-        break
-        case '/signin':
-        this.props.setCurrentTab(1)
-        break
-        case '/signup':
-        this.props.setCurrentTab(2)
-        break
-      }
+      this.props.setCurrentTab(determineTab(location.pathname))
     })
   }
 
@@ -88,11 +55,14 @@ class Layout extends Component {
     this.props.setCurrentTab(tabValue)
   }
 
-  render() {
-    const underLineStyle = {
-      backgroundColor: 'rgb(32,50,67)'
-    }
+  signOut() {
+    this.props.signOut()
+    this.switchComponent('/')
+    this.props.setCurrentTab(0)
+  }
 
+  render() {
+    const underLineStyle = { backgroundColor: 'rgb(32,50,67)' }
     return (
       <div>
         <AppBar
@@ -101,7 +71,7 @@ class Layout extends Component {
           showMenuIconButton={!this.props.showTabs}
           iconElementRight={!this.props.showTabs ? <img src='images/SpaceCadevsWithText.png' className='navLogo'/> : null}
           onLeftIconButtonTouchTap={this.toggleSideNav.bind(this)}
-          children={this.props.showTabs ? [
+          children={this.props.showTabs && !this.props.signedIn ? [
             <Tabs
               key={1}
               inkBarStyle={underLineStyle}
@@ -127,7 +97,39 @@ class Layout extends Component {
                 onClick={() => this.switchComponent('/signup')}
                 />
             </Tabs>
-          ] : []}
+          ] : this.props.signedIn && this.props.showTabs ? [
+            <Tabs
+              key={1}
+              inkBarStyle={underLineStyle}
+              value={this.props.currentTab}
+              onChange={this.handleTabChange.bind(this)}
+              >
+              <Tab
+                label='BLOGS'
+                value={0}
+                className='navTabs'
+                onClick={() => this.switchComponent('/')}
+                />
+              <Tab
+                label='PROFILE'
+                value={1}
+                className='navTabs'
+                onClick={() => this.switchComponent('/signin')}
+                />
+              <Tab
+                label='ADD POST'
+                value={2}
+                className='navTabs'
+                onClick={() => this.switchComponent('/signup')}
+                />
+              <Tab
+                label='SIGN OUT'
+                value={2}
+                className='navTabs'
+                onClick={() => this.signOut()}
+                />
+            </Tabs>
+          ] : null}
           />
 
         <Drawer
@@ -165,12 +167,12 @@ class Layout extends Component {
   }
 }
 
-
 function mapStateToProps(state) {
   return {
     showTabs: state.material_ui.showTabs,
     showSideNav: state.material_ui.showSideNav,
-    currentTab: state.material_ui.currentTab
+    currentTab: state.material_ui.currentTab,
+    signedIn: state.user.signedIn
   }
 }
 

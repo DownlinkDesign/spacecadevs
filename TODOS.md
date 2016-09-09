@@ -1,0 +1,2 @@
+- Check if you are signed in when page loads so you can update the navbar properly in response
+- Create route to validate a users token, and that they exist in the database before confirming that they are logged in

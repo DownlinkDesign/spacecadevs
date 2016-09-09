@@ -10,7 +10,7 @@ var compression = require('compression')
 var users = require('./api_routes/users')
 var blogs = require('./api_routes/blogs')
 var comments = require('./api_routes/comments')
-var likes = require('./api_routes/likes')
+var ratings = require('./api_routes/ratings')
 
 var app = express()
 
@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'dist')))
 app.use('/users', users)
 app.use('/blogs', blogs)
 app.use('/comments', comments)
-app.use('/likes', likes)
+app.use('/ratings', ratings)
 
 app.all('*', function(req,res,next) {
   res.sendFile('index.html', { root: `${__dirname}/dist/`})
