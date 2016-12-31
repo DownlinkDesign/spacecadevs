@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="HandheldFriendly" content="true" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <link rel="shortcut icon" href="/images/SpaceCadevsNoText.ico" type="image/x-icon">
-  <title>SpaceCadevs</title>
-</head>
-<body>
-
-  <div id="app"></div>
-  <script src="/bundle.js"></script>
-
-</body>
+<html ng-app='spaceCadevs'>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='HandheldFriendly' content='true'/>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Titillium+Web:400,400italic,700,700italic,600,600italic,300italic,300,200italic,200'/>
+        <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.min.css'>
+        <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+        <link rel='icon' type='image/png' href='/images/SpaceCadevsNoText.ico'>
+        <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+        <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+        <script src='/bundle.js'></script>
+        <title>SPACECADEVS</title>
+        <base href='/'/>
+    </head>
+    <body>
+        <div ui-view></div>
+    </body>
 </html>

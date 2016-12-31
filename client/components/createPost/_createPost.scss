@@ -1,0 +1,68 @@
+@import '../../sass/utils/variables';
+@import '../../sass/utils/mixins';
+
+.create-post-panel {
+    border: none;
+    box-shadow: none;
+
+    .panel-heading {
+        background: $granitegreyT;
+
+        button {
+            background: black;
+            color: $lightgreen;
+            margin: 5px;
+        }
+    }
+}
+
+.post-component-panel {
+    width: 60%;
+    margin: 0 auto;
+
+    .panel-heading {
+        background: black;
+
+        h1 {
+            color: $lightgreen;
+        }
+
+        i {
+            color: $cardinal;
+        }
+
+        button {
+            background: black;
+            color: $lightgreen;
+            margin: 5px;
+        }
+
+        label {
+            color: white;
+            display: block;
+        }
+
+        select {
+            width: 10%;
+            text-align: center;
+        }
+    }
+
+    .panel-body {
+        input,
+        textarea {
+            width: 80%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        textarea {
+            resize: none;
+        }
+    }
+}
+@media screen and (max-width: 850px) {
+    .post-component-panel {
+        width: 90%;
+    }
+}

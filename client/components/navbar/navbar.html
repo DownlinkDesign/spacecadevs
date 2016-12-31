@@ -1,0 +1,30 @@
+<nav class='navbar navbar-default' role='navigation'>
+    <div class='navbar-header'>
+        <button type='button' class='navbar-toggle' ng-init='isNavCollapsed=true' ng-click='isNavCollapsed = !isNavCollapsed'>
+            <span class='sr-only'>Toggle navigation</span>
+            <span class='icon-bar'></span>
+            <span class='icon-bar'></span>
+            <span class='icon-bar'></span>
+        </button>
+        <div ui-sref='layout.posts'><img id='navbar-img' src='/images/SpaceCadevsWithText.png'/></div>
+    </div>
+    <div class='collapse navbar-collapse' uib-collapse='isNavCollapsed'>
+        <ul class='nav navbar-nav'>
+            <li>
+                <a ui-sref-active='activeAnchor' ui-sref='layout.posts'>POSTS</a>
+            </li>
+            <li ng-if='!vm.session'>
+                <a ui-sref-active='activeAnchor' ui-sref='layout.signup'>SIGN UP</a>
+            </li>
+            <li ng-if='!vm.session'>
+                <a ui-sref-active='activeAnchor' ui-sref='layout.signin'>SIGN IN</a>
+            </li>
+            <li ng-if='vm.session'>
+                <a ui-sref-active='activeAnchor' ui-sref='layout.createPost'>CREATE POST</a>
+            </li>
+            <li ng-if='vm.session' ng-click='vm.signout()'>
+                <a>SIGN OUT</a>
+            </li>
+        </ul>
+    </div>
+</nav>

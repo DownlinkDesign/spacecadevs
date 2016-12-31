@@ -1,59 +1,55 @@
-process.env.NODE_ENV === 'development' ? require('dotenv').config() : null
-var express = require('express')
-var path = require('path')
-var logger = require('morgan')
-var favicon = require('serve-favicon')
-var bodyParser = require('body-parser')
-var cors = require('cors')
-var compression = require('compression')
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const compression = require('compression');
+const cors = require('cors');
 
-var users = require('./api_routes/users')
-var blogs = require('./api_routes/blogs')
-var comments = require('./api_routes/comments')
-var ratings = require('./api_routes/ratings')
+const users = require('./server/components/users/users.js');
 
-var app = express()
+const app = express();
 
-app.use(favicon(__dirname + '/dist/images/SpaceCadevsNoText.ico'));
-app.use(cors())
-app.use(compression())
-app.use(logger('dev'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(express.static(path.join(__dirname, 'dist')))
+app.use(cors());
+app.use(logger('dev'));
+app.use(compression());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use('/users', users)
-app.use('/blogs', blogs)
-app.use('/comments', comments)
-app.use('/ratings', ratings)
+app.use('/users', users);
 
-app.all('*', function(req,res,next) {
-  res.sendFile('index.html', { root: `${__dirname}/dist/`})
-})
+app.all('*', (req, res, next) => {
+    res.sendFile('index.html', {
+        root: __dirname + '/dist/'
+    });
+});
 
-app.use(function(req, res, next) {
-  var err = new Error('Not Found')
-  err.status = 404
-  next(err)
-})
+app.use((req, res, next) => {
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
 
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500)
-    res.json({
-      message: err.message,
-      error: err
-    })
-  })
+    app.use((err, req, res, next) => {
+        res.status(err.status || 500);
+        res.json({
+            message: err.message,
+            error: err
+        });
+    });
 }
 
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500)
-  res.json({
-    message: err.message,
-    error: {}
-  })
-})
+app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    res.json({
+        message: err.message,
+        error: {}
+    });
+});
 
-
-module.exports = app
+module.exports = app;
