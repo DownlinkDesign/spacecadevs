@@ -1,11 +1,22 @@
 class CreatePostController {
     /**@ngInject*/
-    constructor($sce, $scope) {
+    constructor($sce, $scope, $localStorage) {
         this.$sce = $sce;
         this.$scope = $scope;
+        this.$localStorage = $localStorage;
         this.post = [];
         this.changePosition = {};
         this.ind = {};
+
+        if (this.$localStorage.post) {
+            this.post = this.$localStorage.post;
+        }
+
+        this.$scope.$watch(() => {
+            return this.post;
+        }, (newVal) => {
+            this.$localStorage.post = newVal;
+        }, true);
     }
 
     range(start, end) {
