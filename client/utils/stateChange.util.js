@@ -6,12 +6,16 @@ export default (['$rootScope', 'authService', '$state', '$localStorage', '$timeo
                     if (res && toState.mustBeLoggedOut || !res && toState.mustBeLoggedIn) {
                         $timeout(() => {
                             $state.go('layout.posts');
+                            $rootScope.$emit('closeNavbarToggle', true);
                         });
+                    } else {
+                        $rootScope.$emit('closeNavbarToggle', true);
                     }
                 })
                 .catch((err) => {
                     $timeout(() => {
                         $state.go('layout.posts');
+                        $rootScope.$emit('closeNavbarToggle', true);
                     });
                 });
         });
